@@ -1,0 +1,36 @@
+﻿@model WEB_Boletim.Models.Materia
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Materia</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DescricaoMateria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DescricaoMateria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataDeCadastroMateria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataDeCadastroMateria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Situacoes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Situacoes.SituacaoMateria)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
+    <a asp-action="Index">Voltar</a>
+</div>

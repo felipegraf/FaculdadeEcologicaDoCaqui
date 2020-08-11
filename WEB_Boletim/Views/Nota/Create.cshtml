@@ -1,0 +1,74 @@
+﻿@model WEB_Boletim.Models.Nota
+
+@{
+    ViewData["Title"] = "Cadsatro de Nota";
+}
+<script src="~/js/sweetalert2.js"></script>
+@if (ViewBag._sucesso != null)
+{
+    <div class="modal hide" data-backdrop="static" data-keyboard="false">
+        <script type="text/javascript">
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Cadastrado com Sucesso',
+            }).then(function () {
+                window.location = "/Nota/Index";
+
+            });
+        </script>
+    </div>
+}
+
+<h1>Cadastrar Nota</h1>
+
+<h4>Nota</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AlunoID" class="control-label"></label>
+                <select asp-for="AlunoID" class="form-control" asp-items="ViewBag.AlunoID"><option selected="selected">Selecionar...</option></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MateriaID" class="control-label"></label>
+                <select asp-for="MateriaID" class="form-control" asp-items="ViewBag.MateriaID"><option selected="selected">Selecionar...</option></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NotaAluno" class="control-label"></label>
+                <input asp-for="NotaAluno" class="form-control" maxlength="2" />
+                <span asp-validation-for="NotaAluno" class="text-danger"></span>
+            </div>
+            @if (ViewBag._erroNota != null)
+            {
+                <div class="modal hide" data-backdrop="static" data-keyboard="false">
+                    <script type="text/javascript">
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Algo deu errado...',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    </script>
+                </div>
+                <div class="alert alert-warning">
+                    @ViewBag._erroNota
+                </div>
+            }
+
+
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div>
+    <a href="~/Home/Index">Voltar</a>
+</div>
+

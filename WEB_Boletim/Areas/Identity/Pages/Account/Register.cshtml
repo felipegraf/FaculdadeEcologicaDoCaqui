@@ -1,0 +1,45 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registrar";
+    Layout = "~/Areas/Identity/Pages/_LoginLayout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                @*<img src="~/imagens/employer-logo.png" />*@
+                <h1>@ViewData["Title"]</h1>
+                <h6><label asp-for="Input.Email"></label></h6>
+                <input asp-for="Input.Email" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <h6><label asp-for="Input.Password"></label></h6>
+                <input asp-for="Input.Password" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <h6><label asp-for="Input.ConfirmPassword"></label></h6>
+                <input asp-for="Input.ConfirmPassword" class="form-control" />
+
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <div class="form-group">
+                <p>
+                    <br />
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Entrar</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

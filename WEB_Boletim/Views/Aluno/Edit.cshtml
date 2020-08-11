@@ -1,0 +1,107 @@
+﻿@model WEB_Boletim.Models.Aluno
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@{
+    ViewData["Title"] = "Editar";
+}
+<script src="~/js/sweetalert2.js"></script>
+@if (ViewBag._sucesso != null)
+{
+    <div class="modal hide" data-backdrop="static" data-keyboard="false">
+        <script type="text/javascript">
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Cadastrado com Sucesso',
+            }).then(function () {
+                window.location = "/Aluno/Index";
+            });
+        </script>
+    </div>
+}
+
+<h1>Editar</h1>
+
+<h4>Aluno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="NomeAluno" class="control-label"></label>
+                <input asp-for="NomeAluno" class="form-control" />
+                <span asp-validation-for="NomeAluno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SobrenomeAluno" class="control-label"></label>
+                <input asp-for="SobrenomeAluno" class="form-control" />
+                <span asp-validation-for="SobrenomeAluno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimentoAluno" class="control-label"></label>
+                <input asp-for="DataNascimentoAluno" class="form-control" />
+                <span asp-validation-for="DataNascimentoAluno" class="text-danger"></span>
+            </div>
+            @if (ViewBag._erroIdade != null)
+            {
+                <div class="modal hide" data-backdrop="static" data-keyboard="false">
+                    <script type="text/javascript">
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Algo deu errado...',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    </script>
+                </div>
+                <div class="alert alert-warning">
+                    @ViewBag._erroIdade
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="CPFAluno" class="control-label"></label>
+                <input id="txtCPF" asp-for="CPFAluno" class="form-control" />
+                <span asp-validation-for="CPFAluno" class="text-danger"></span>
+            </div>
+            @if (ViewBag._erroCPF != null)
+            {
+                <script type="text/javascript">
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Algo deu errado...',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                </script>
+                <div class="alert alert-warning">
+                    @ViewBag._erroCPF
+                </div>
+
+            }
+            <div class="form-group">
+                <label asp-for="CursoID" class="control-label"></label>
+                <select asp-for="CursoID" class="form-control" asp-items="ViewBag.CursoID"></select>
+                <span asp-validation-for="CursoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+
+@section Scripts {
+    <script>$("#txtCPF").mask('000.000.000-00', { placeholder: "___.___.___-__" });</script>
+
+}

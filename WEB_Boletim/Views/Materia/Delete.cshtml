@@ -1,0 +1,91 @@
+﻿@model WEB_Boletim.Models.Materia
+
+@{
+    ViewData["Title"] = "Excluir";
+}
+    <script src="~/js/sweetalert2.js"></script>
+<h1>Excluir</h1>
+
+<h3>Tem certeza que deseja Excluir?</h3>
+<div>
+    <h4>Materia</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DescricaoMateria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DescricaoMateria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataDeCadastroMateria)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataDeCadastroMateria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Situacoes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Situacoes.SituacaoMateria)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <button onclick="sweetalerts();" class="btn btn-danger" type="submit">Excluir</button>
+    </form>
+    <script type="text/javascript">
+
+        function sweetalerts() {
+            event.preventDefault();
+            var form = event.target.form;
+            const swalWithBootstrapButtons = Swal.mixin(
+                {
+                    customClass:
+                    {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+            swalWithBootstrapButtons.fire(
+                {
+                    title: 'Você tem certeza?',
+                    text: 'Você não poderá reverter isso!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sim, Excluir',
+                    cancelButtonText: 'Não, Cancelar',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        form.submit();
+                        swalWithBootstrapButtons.fire(
+                            'Excluído!',
+                            'Seu arquivo foi deletado',
+                            'success')
+                    }
+
+                    else if (
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelado',
+                            'Seu arquivo está seguro :)',
+                            'error',
+
+                        )
+                    }
+                })
+
+
+        }
+    </script>
+
+
+
+    <br>
+    <br /><a asp-action="Index">Voltar</a>
+
+</div>

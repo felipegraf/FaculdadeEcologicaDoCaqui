@@ -1,0 +1,131 @@
+﻿@model WEB_Boletim.Models.Aluno
+
+@{
+    ViewData["Title"] = "Excluir";
+}
+<script src="~/js/sweetalert2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<h1>Excluir</h1>
+
+<h3>Tem certeza que deseja excluir?</h3>
+<div>
+    <h4>Aluno</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeAluno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomeAluno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SobrenomeAluno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SobrenomeAluno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DataNascimentoAluno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DataNascimentoAluno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CPFAluno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CPFAluno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Cursos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cursos.CursoFaculdade)
+        </dd>
+    </dl>
+</div>
+<form asp-action="Delete" method="post">
+    <button onclick="sweetalerts();" class="btn btn-danger" type="submit">Excluir</button>
+</form>
+    <script type="text/javascript">
+        
+        function sweetalerts() {
+            event.preventDefault();
+            var form = event.target.form;
+            const swalWithBootstrapButtons = Swal.mixin(
+                {
+                    customClass:
+                    {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+            swalWithBootstrapButtons.fire(
+                {
+                    title: 'Você tem certeza?',
+                    text: 'Você não poderá reverter isso!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sim, Excluir',
+                    cancelButtonText: 'Não, Cancelar',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        form.submit();
+                        swalWithBootstrapButtons.fire(
+                            'Excluído!',
+                            'Seu arquivo foi deletado',
+                            'success')
+                    }
+
+                    else if (
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelado',
+                            'Seu arquivo está seguro :)',
+                            'error',
+
+                        )
+                    }
+                })
+
+
+        }
+    </script>
+
+
+
+    <br>
+    <br /><a asp-action="Index">Voltar</a>
+
+
+
+
+    @*<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm">Excluir</button>
+
+            <div class="modal fade" id="confirm" role="dialog">
+                <div class="modal-dialog modal-md">
+
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <p>Realmente deseja excluir?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="ID" />
+                                <input type="submit" value="Excluir" class="btn btn-danger" /> |
+                                <a asp-action="Index">Voltar</a>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            |<a asp-action="Index">Voltar</a>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    *@

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WEB_Boletim.Models.Aluno>
+
+@{
+    ViewData["Title"] = "Alunos Cadastrados";
+}
+
+<h1>Alunos Cadastrados</h1>
+
+<p>
+    <a asp-action="Create">Novo Cadastro</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SobrenomeAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimentoAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPFAluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cursos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeAluno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SobrenomeAluno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimentoAluno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPFAluno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cursos.CursoFaculdade)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a href="~/Home/Index">Voltar</a>
+</div>

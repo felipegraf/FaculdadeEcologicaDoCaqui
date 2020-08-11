@@ -1,0 +1,38 @@
+﻿@model WEB_Boletim.Models.Nota
+
+@{
+    ViewData["Title"] = "Detailhes";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Nota</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Alunos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Alunos.CPFAluno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Materias)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Materias.DescricaoMateria)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NotaAluno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NotaAluno)
+        </dd>
+    </dl>
+
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Editar</a> |
+    <a asp-action="Index">Voltar</a>
+</div>

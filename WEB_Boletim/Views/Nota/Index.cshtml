@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WEB_Boletim.Models.Nota>
+
+@{
+    ViewData["Title"] = "Boletim";
+}
+
+<h1>Boletim</h1>
+@if (ViewBag._pesquisaAlunos == null)
+{<form asp-controller="Nota" asp-action="Index">
+        
+            <select style=" background-color: #ffffff; border: solid 1px; width: 300px;" name="SearchString" asp-items="ViewBag.AlunoID">
+                    <option selected="selected">Selecionar...</option>
+                </select>
+            <input type="submit" value="Pesquisar" class="btn btn-primary" style="margin-top:5px;" />
+        
+    </form>
+    <div>
+        <a href="~/Home/Index">Voltar</a>
+    </div>
+}
+
+@if (ViewBag._pesquisaAlunos != null)
+{
+    <a href="~/Nota/Index">Nova Consulta</a>
+    <h5>Aluno: @ViewBag._pesquisaAlunos</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Materias)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotaAluno)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Materias.DescricaoMateria)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NotaAluno)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Excluir</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
